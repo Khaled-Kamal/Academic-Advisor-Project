@@ -1,6 +1,8 @@
-# Decision tree implementation
+#Academic-Advisor-Project
 
-## About the Decision tree
+
+## About the Academic-Advisor-Project
+
 Decision Tree is one of the most powerful and popular algorithms. Python Decision-tree algorithm falls under the category of supervised learning algorithms. It works for both continuous as well as categorical output variables. In this article, We are going to implement a Decision tree in Python algorithm on the Balance Scale Weight & Distance Database presented on the UCI.
 
 Decision Tree
