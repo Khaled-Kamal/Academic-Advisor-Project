@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        /* إعدادات الصفحة */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #e0e0e0, #f4f4f4); /* خلفية رمادية فاتحة */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow: hidden;
+        }
+
+        /* الرأس */
+        header {
+            background-color: #1f59c3;
+            color: #fff;
+            width: 100%;
+            text-align: center;
+            padding: 1.5rem 0;
+            font-size: 2rem;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(10, 98, 172, 0.62);
+            animation: slideDown 1s ease-in-out; /* انزلاق لأسفل عند التحميل */
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        /* حاوية المحتوى */
+        .container {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(49, 108, 186, 0.3);
+            width: 90%;
+            max-width: 600px;
+            margin-top: 2rem;
+            text-align: center;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        /* تحريك المحتوى للأعلى */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #333;
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        h2:hover {
+            transform: scale(1.1); /* تكبير العنوان عند التحويم */
+        }
+
+        /* تنسيق النموذج */
+        form label {
+            display: block;
+            margin: 1rem 0 0.5rem;
+            text-align: left;
+            color: #000000;
+            font-size: 1rem;
+        }
+
+        form input[type="number"] {
+            width: 100%;
+            padding: 0.7rem;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        form input[type="checkbox"] {
+            accent-color: #333;
+            width: 18px;
+            height: 18px;
+            margin-right: 0.5rem;
+            cursor: pointer;
+        }
+
+        form button {
+            background-color: #1f59c3;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            width: 100%;
+        }
+
+        form button:hover {
+            background-color: #555;
+            transform: translateY(-5px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* رابط تسجيل الخروج */
+        .logout {
+            margin-top: 1.5rem;
+        }
+
+        .logout a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .logout a:hover {
+            color: #555;
+            transform: scale(1.05);
+        }
+
+        /* تحسين الهواتف المحمولة */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        IT Course Selection System
+    </header>
+    <div class="container">
+        <h2>Choose Your Courses</h2>
+        <form action="{{ url_for('results') }}" method="POST">
+            <label>Enter GPA:</label>
+            <input type="number" step="0.1" name="gpa" placeholder="Enter your GPA" required>
+
+            <label>Select Completed Courses:</label>
+            <label><input type="checkbox" name="completed_courses" value="Project Management"> Project Management</label>
+            <label><input type="checkbox" name="completed_courses" value="Computer Networks"> Computer Networks</label>
+            <label><input type="checkbox" name="completed_courses" value="Systems Analysis and Design"> Systems Analysis and Design</label>
+            <label><input type="checkbox" name="completed_courses" value="Web Programming"> Web Programming</label>
+            <label><input type="checkbox" name="completed_courses" value="Network Security"> Network Security</label>
+            <label><input type="checkbox" name="completed_courses" value="Operating Systems"> Operating Systems</label>
+
+            <button type="submit">Submit</button>
+        </form>
+        <div class="logout">
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </div>
+    </div>
+</body>
+</html>

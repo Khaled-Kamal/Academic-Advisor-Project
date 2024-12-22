@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+    <style>
+        /* إعدادات الصفحة */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom right, #93bfff, #7ca7e4); /* تدرجات زرقاء دافئة */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            color: #5d9df6; /* لون نص داكن ومريح للعين */
+        }
+
+        /* حاوية النتائج بتصميم حديث */
+        .results-container {
+            background: rgb(255, 255, 255); /* خلفية بيضاء شبه شفافة */
+            backdrop-filter: blur(8px);
+            border-radius: 20px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            width: 90%;
+            max-width: 650px;
+            text-align: center;
+            animation: fadeIn 1.2s ease-out;
+        }
+
+        /* أنيميشن fade-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            color: #23344e; /* أزرق غامق للتباين مع الخلفية */
+            font-size: 2.4rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        p {
+            color: #2b395c; /* لون نص داكن ولكنه ناعم */
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        /* قائمة الدورات */
+        .courses {
+            list-style: none;
+            padding: 0;
+            margin: 1rem 0;
+        }
+
+        .courses li {
+            background: #5aa3f1; /* أزرق هادئ لتمييز الدورات */
+            color: #ffffff;
+            margin: 0.5rem auto;
+            padding: 0.8rem;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .courses li:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.25);
+            background: #3e64a4; /* أزرق أغمق عند التحويم */
+        }
+
+        .btn-select {
+            background-color: #4a72b3;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-select:hover {
+            background-color: #2f5287;
+        }
+
+        /* الجدول لعرض المواد المختارة */
+        .selected-courses {
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            width: 100%;
+            max-height: 250px;
+            overflow-y: auto;
+        }
+
+        .selected-courses table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .selected-courses th, .selected-courses td {
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        .selected-courses th {
+            background-color: #4a72b3;
+            color: white;
+        }
+
+        .selected-courses tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .btn-delete {
+            background-color: #e74c3c;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .btn-delete:hover {
+            background-color: #c0392b;
+        }
+
+        /* زر تأكيد */
+        .btn-confirm {
+            margin-top: 1.5rem;
+            padding: 0.9rem 2.5rem;
+            background: #27ae60; /* أخضر مريح */
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .btn-confirm:hover {
+            background: #2ecc71; /* أخضر أفتح عند التحويم */
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="results-container">
+        <h2>Your Results</h2>
+
+        {% if available_courses %}
+            <p>Based on your GPA: <strong>{{ gpa }}</strong> and completed courses, the following courses are available for you:</p>
+            <ul class="courses">
+                {% for course in available_courses %}
+                    <li>
+                        {{ course }}
+                        <button class="btn-select" onclick="addCourse('{{ course }}')">Select</button>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Unfortunately, no courses are currently available based on your GPA: <strong>{{ gpa }}</strong> and completed courses.</p>
+            <p>Here’s some advice to improve your academic standing:</p>
+        {% endif %}
+
+        <p>{{ advice }}</p>
+
+        <!-- جدول المواد المختارة -->
+        <div class="selected-courses">
+            <h3>Selected Courses:</h3>
+            <table id="selected-courses-table">
+                <thead>
+                    <tr>
+                        <th>Course Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- المواد المختارة ستظهر هنا -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- زر تأكيد -->
+        <button class="btn-confirm" onclick="confirmCourses()">Confirm</button>
+
+        <a href="{{ url_for('index') }}" class="btn-back">Go Back</a>
+    </div>
+
+    <script>
+        // إضافة مادة إلى الجدول
+        function addCourse(courseName) {
+            var table = document.getElementById('selected-courses-table').getElementsByTagName('tbody')[0];
+            var newRow = table.insertRow(table.rows.length);
+            var courseCell = newRow.insertCell(0);
+            var actionCell = newRow.insertCell(1);
+
+            courseCell.textContent = courseName;
+
+            // زر حذف
+            var deleteButton = document.createElement('button');
+            deleteButton.classList.add('btn-delete');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function() {
+                deleteCourse(newRow);
+            };
+            actionCell.appendChild(deleteButton);
+        }
+
+        // حذف مادة من الجدول
+        function deleteCourse(row) {
+            var table = document.getElementById('selected-courses-table').getElementsByTagName('tbody')[0];
+            table.deleteRow(row.rowIndex - 1); // حذف الصف
+        }
+
+        // تأكيد المواد
+        function confirmCourses() {
+            alert("Congratulations, your courses have been successfully registered!");
+        }
+    </script>
+</body>
+</html>
