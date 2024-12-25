@@ -22,6 +22,6 @@ Technologies Used:
 - [Khaled Waleed]
 
 
-## ScreenShots From the Decision tree implementation:
+## ScreenShots From the Decision tree implementation:.
 
 
