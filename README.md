@@ -10,7 +10,7 @@ Benefits:
 Technologies Used:
 - Artificial Intelligence for data analysis and recommendations.
 - User-friendly interactive interface for students.
-- Integration with Learnin
+- Integration with Learnin.
 
 
 ## Team who Contributed in the project :
