@@ -9,7 +9,7 @@ Benefits:
 - Provides notifications and reminders about registration deadlines and schedule changes.
 Technologies Used:
 - Artificial Intelligence for data analysis and recommendations.
-- User-friendly interactive interface for students..
+- User-friendly interactive interface for students.
 - Integration with Learnin.
 
 
