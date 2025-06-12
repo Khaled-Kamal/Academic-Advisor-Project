@@ -13,7 +13,7 @@ Technologies Used:
 - Integration with Learnin.
 
 
-## Team who Contributed in the project :_
+## Team who Contributed in the project :
 - [Khaled Kamal](https://github.com/Khaled-Kamal)
 - [Husssien Talha]
 - [Esraa Abdalfatah]
